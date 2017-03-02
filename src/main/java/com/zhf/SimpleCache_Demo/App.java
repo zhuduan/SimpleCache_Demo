@@ -1,9 +1,7 @@
 package com.zhf.SimpleCache_Demo;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
 
-import org.omg.CORBA.CTX_RESTRICT_SCOPE;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -17,7 +15,7 @@ import org.zhuduan.cache.SimpleCacheAspect;
 @Service
 public class App{	
 	
-    public static void main( String[] args ) throws InterruptedException{
+    public static void main( String[] args ) throws InterruptedException, NoSuchMethodException, SecurityException{
 		@SuppressWarnings("resource")
 		AbstractApplicationContext cxt = new ClassPathXmlApplicationContext("applicationContext.xml");
 		App app = (App) cxt.getBean(App.class);  
@@ -30,6 +28,9 @@ public class App{
 			System.out.println(anno.annotationType() + "," + anno.toString());
 		}
 		
+		for(Annotation anno : App.class.getMethod("helloWorld").getAnnotations()){
+			System.out.println(anno.annotationType() + "," + anno.toString());
+		}
 		
 		System.out.println("start!");
 		for(int i=0;i<6;i++){
@@ -40,11 +41,11 @@ public class App{
     }
     
     @SimpleCache(expire=2)
-    private String helloWorld(){
+    public String helloWorld(){
     	return "helloWorld";
     }
     
-    private String helloWorld_NoCache(){
+    public String helloWorld_NoCache(){
     	return "helloWorld no cache";
     }
 }
