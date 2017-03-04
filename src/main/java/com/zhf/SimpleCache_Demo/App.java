@@ -1,12 +1,9 @@
 package com.zhf.SimpleCache_Demo;
 
-import java.lang.annotation.Annotation;
-
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.zhuduan.cache.SimpleCache;
-import org.zhuduan.cache.SimpleCacheAspect;
 
 /**
  * Hello world!
