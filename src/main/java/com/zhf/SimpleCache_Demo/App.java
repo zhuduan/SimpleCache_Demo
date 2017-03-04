@@ -10,6 +10,7 @@ import org.zhuduan.cache.SimpleCacheAspect;
 
 /**
  * Hello world!
+ * 使用了AOP Cache的Demo
  *
  */
 @Service
@@ -20,22 +21,9 @@ public class App{
 		AbstractApplicationContext cxt = new ClassPathXmlApplicationContext("applicationContext.xml");
 		App app = (App) cxt.getBean(App.class);  
 		
-		SimpleCacheAspect aspect = cxt.getBean(SimpleCacheAspect.class);
-		System.out.println("local: " + aspect.isUseLocalCache());
-		
-		
-		for(Annotation anno : SimpleCacheAspect.class.getAnnotations()){
-			System.out.println(anno.annotationType() + "," + anno.toString());
-		}
-		
-		for(Annotation anno : App.class.getMethod("helloWorld").getAnnotations()){
-			System.out.println(anno.annotationType() + "," + anno.toString());
-		}
-		
 		System.out.println("start!");
 		for(int i=0;i<6;i++){
 			System.out.println(i+": "+app.helloWorld());
-			System.out.println(i+": "+app.helloWorld_NoCache());
 			Thread.sleep(1000);
 		}
     }
@@ -45,7 +33,4 @@ public class App{
     	return "helloWorld";
     }
     
-    public String helloWorld_NoCache(){
-    	return "helloWorld no cache";
-    }
 }
