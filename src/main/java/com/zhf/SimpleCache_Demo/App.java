@@ -26,8 +26,8 @@ public class App{
     }
     
     @SimpleCache(expire=2)
-    public String helloWorld(){
-    	return "helloWorld";
+    public SimplePojo helloWorld(){
+    	return (new SimplePojo(Math.random()));
     }
     
 }
